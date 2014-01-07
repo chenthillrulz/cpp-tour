@@ -1,0 +1,407 @@
+C to C++
+
+The Go Authors
+http://golang.org
+
+# Throughout this file are a series of lines that begin with
+# the string "#appengine: ". These lines are included in
+# the tour content when deployed as an App Engine app.
+# Furthermore, a single non-blank line that immediately follows
+# a run of "#appengine: " lines will be hidden. This is so that
+# App Engine-specific content may replace existing content.
+# For example, this paragraph
+# 	We are running
+# 	#appengine: on App Engine.
+# 	locally.
+# 	Yay!
+# reads as "We are running on App Engine. Yay!" on App Engine,
+# and "We are running locally. Yay!" otherwise.
+
+* Hello, வணக்கம், नमस्कार
+
+Welcome to the Tour of C++. This tour interface has been modified from [[http://tour.golang.org/#1]]
+
+
+# Write how the tutorial is laid out
+
+The tour has some exercises for you to complete.
+
+The tour is interactive. Click the Run button now (or type Shift-Enter) to compile and run the program on
+#appengine: a remote server.
+your computer.
+The result is displayed below the code.
+
+These example programs demonstrate different aspects of C++. The programs in the tour are meant to be starting points for your own experimentation.
+
+Edit the program and run it again.
+
+When you're ready to move on, click the right arrow down below or type the PageDown key.
+You can also navigate using the menu under the "Go" flag at the top of the page.
+
+.play hello.cpp
+* Introduction to c++
+C++ is a multiparadigm programming language, one support-
+ing a combination of procedural, object-oriented, functional, generic,
+and metaprogramming features.
+
+To make sense of C++, you have to recognize its primary sub-
+languages,
+
+	C
+	Object Oriented C++
+		Data abstraction and encapsulation
+		Static Polymorphism 
+		(function overloading, operator overloading, templates)
+		Dynamic polymorphism 
+		(Inheritance, virtual functions)
+	Template C++
+	The STL
+
+.play intro.cpp
+* Sorting algorithm implemented in C language
+
+It uses two macros NUMELEMENTS and DATALIMIT. NUMELEMENTS is the size of the input array and DATALIMIT is the maximum input value.
+
+rand () is used to generate the input values for the array.
+
+Since C supports pass by value, we use pointers to avoid copying the whole array into Sort function.
+
+Guess what this sort is ? ;-)
+
+.play selection_sort.c
+* Sorting algorithm converted into c++
+
+This demonstrates the following features in c++,
+
+     + New style of header inclusion
+     + Usage of const instead of macros for defining variables
+     + Inline functions 
+     + iostream
+     + Passing an array and a variable by reference
+     + Namespaces and scope resolution operators
+     + Declaring variables when needed 
+
+References are const pointers where the pointers address cannot be changed. Eg. char * const pChar
+
+Detailed differences between pointers and references in general is available [[http://stackoverflow.com/questions/57483/what-are-the-differences-between-pointer-variable-and-reference-variable-in-c/57492#57492][here]]
+     
+.play selection_sort.cpp
+* Convert the sorting algorithm to c++
+
+Use the previous learning to convert the program from C to C++
+
+There is a slight disadvantage with the readability of the code with using references in API's.
+
+It is hard to determine if the data will be modified by the calling function without 
+looking at the signature of the function as its not evident whether it is pass by value or pass by reference.
+
+.play insertion_sort.c
+* Default arguments
+A default argument is a value given in the declaration that the compiler automatically inserts if you don’t provide a value in the function call.
+
+An important use of default arguments is when you start out with a function with a set of arguments, and after it’s been used for a while you discover you need to add arguments. 
+
+By defaulting all the new arguments, you ensure that all client code using the previous interface is not disturbed.
+
+.play swap_default_arg.cpp
+* Function Overloading
+Function overloading allows using the same function name with varying arguments.
+
+This is possible by [[http://en.wikipedia.org/wiki/Name_mangling][decorating]] (name mangling) the function name.
+
+In our example the function names are decorated as swap_int_int and swap_int_int_int respectively.
+
+It is not possible to overload functions on return values. This is to preserve backward compatibility with C. As in C language the return values can be ignored without
+assigning to a variable. It becomes hard to differenciate whether the function's return type is void or some other data type.
+
+.play swap_function_overload.cpp
+* Function templates
+Templates is a feature that allows a function to operate with [[http://en.wikipedia.org/wiki/Generic_programming][generic types]].
+
+This allows functions to work on different data types without rewriting the function for each one.
+
+On instantiation the compiler generates the code for the function based on the data type.
+
+Food for thought - Why is the swap function renamed to interchange ?
+
+.play swap_template.cpp
+
+* Classes
+
+classes allow the programmer to define new data structures and allow functions to be written inside them.
+
+Instances of these data types are known as objects and can contain member variables, constants, member functions, and overloaded operators defined by the programmer. 
+
+classes provide access control through public, protected and private access specifiers. 
+
+classes allow inheritence.
+
+class and struct are almost the same in C++ with a slight difference, with struct the default access specifier is public while with class its private.
+
+.play classes.cpp
+* Constructor Destructor Illustration
+
+Illustrating the constructors and destructors
+
+.play ctor_example.cpp
+
+* Constructors and Destructors
+
+A constructor (sometimes shortened to ctor) in a class is a special type of subroutine called to create an object.
+
+It prepares the new object for use, often accepting arguments that the constructor uses to set member variables required.
+
+Constructors have the same name as the class name and have no return type.
+
+Default constructors take no arguments. If the class specifies no constructor, compilers generates a default constructor for the class.
+
+Constructors that can take arguments are termed as parameterized constructors. The number of arguments can be greater or equal to one(1).
+
+Copy constructors define the actions performed by the compiler when copying class objects. A copy constructor has one formal parameter that is the type of the class (the parameter may be a reference to an object). It is used to create a copy of an existing object of the same class.
+
+Conversion constructors provide a means for a compiler to implicitly create an object belonging to one class based on an object of a different type. These constructors are usually invoked implicitly to convert arguments or operands to an appropriate type, but they may also be called explicitly.
+
+Move constructors take an rvalue reference to an object of the class, and are used to implement ownership transfer of the parameter object's resources. (Since c++-11)
+
+Destructor (sometimes shortened to dtor) is a method which is automatically invoked when the object is destroyed.
+
+* Default constructor, Copy Constructor, Assignment operators and Destructor
+
+Compiler implicitly defines Default constructor, Copy Constructor, Assignment operators and Destructor if they are not defined by the programmer. If a constructor with any
+arguments is defined, default constructor will not be defined by the compiler.
+
+Default constructors are automatically invoked in the following circumstances:
+
+	When an object value is declared with no argument list.
+	When an array of objects is declared, the default constructor is used to initialize all the elements
+	When a derived class constructor does not explicitly call the base class constructor in its initializer list, the default constructor for the base class is called.
+	When a class constructor does not explicitly call the constructor of one of its object-valued fields in its initializer list, the default constructor for the field's class is called
+	In the standard library, certain containers "fill in" values using the default constructor when the value is not given explicitly, e.g. vector<MyClass>(10). 
+
+Assignment operator is called during a copy assignment.
+
+A Copy Constructor may be called in following cases: [Except in certain cases where compiler supports Return value optimization]
+
+	When an object of the class is passed (to a function) by value as an argument.
+	When an object of the class is returned by value.
+	When an object is constructed based on another object of the same class.
+	When compiler generates a temporary object.
+
+Destructor is called when an object gets out of scope or is destroyed.
+
+* Exceptions
+
+A program throws an exception when a problem shows up. This is done using a throw keyword.
+
+A program catches an exception with an exception handler at the place in a program where you want to handle the problem. The catch keyword indicates the catching of an exception.
+
+A try block identifies a block of code for which particular exceptions will be activated. It's followed by one or more catch blocks.
+
+std:unexpected is called if an expected which is not specified inside throw() (as part of the function declaration) is thrown. The default unexpected handler terminates the program.
+
+.play exceptions.cpp
+
+* Dynamic memory allocation
+
+Dynamic memory is allocated using operator new.
+
+new is followed by a data type specifier and, if a sequence of more than one element is required, the number of these within brackets []. 
+
+It returns a pointer to the beginning of the new block of memory allocated.
+
+Use nothrow constant to prevent new from throwing exceptions and the failure will return a null pointer.
+
+The allocated memory is released by delete.
+
+.play dynamic_memory.cpp
+* Inheritance
+
+Inheritance sets up a relationship by which the functionalites from a class can be re-used in another class.
+
+The relationships of objects or classes through inheritance give rise to a hierarchy.
+
+Inheritance is a mechanism for code reuse.
+
+Public inheritance represents 'is-a' relationship between the derived and base classes.
+
+		Animal
+		  ^
+		  |
+		 Dog 
+
+Note the order in which constructors and destructors are called.		
+
+Empty class demostrates the empty base class optimization.
+
+.play inheritance.cpp
+* Types of Inheritance 
+Public inheritance represents 'is-a' relationship between the derived and base classes.
+
+Private inheritance represents 'is-implemented-in-terms-of'. It is more like composition.
+
+Private inheritance can take advantage of protected members and typedefs from base class.
+
+Protected inheritance can be used when the base class implementation needs to be exposed to derived classes only.
+Not aware of an exact use for this.
+
+
+	class A 
+	{
+		public:
+		    int x;
+		protected:
+		    int y;
+		private:
+		    int z;
+	};
+
+	class B : public A
+	{
+	    // x is public
+	    // y is protected
+	    // z is not accessible from B
+	};
+
+	class C : protected A
+	{
+	    // x is protected
+	    // y is protected
+	    // z is not accessible from C
+	};
+
+	class D : private A
+	{
+	    // x is private
+	    // y is private
+	    // z is not accessible from D
+	};
+
+To know about the abuses of inheritance and Siamese Twin Functions. Checkout - 
+
+[[http://www.gotw.ca/publications/mill06.htm][Uses and Abuses of Inheritance, Part 1]]
+
+[[http://www.gotw.ca/publications/mill07.htm][Uses and Abuses of Inheritance, Part 2]]
+
+.play inheritance_types.cpp
+* Multiple inheritance
+Multiple inheritance refers to a feature of some object-oriented programming languages in which a derived class can inherit behaviors and features from more than one base class.
+
+The sample program also demonstrates the [[http://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem][diamond problem]].
+
+ .	       Animal
+ .	     /	     \
+ .	Bird	       Horse
+ .	     \	     /
+ .         Flying Horse
+
+
+This is solved by virtually deriving the classes Bird and Horse from Animal. Bird and Horse will now share the same base class.
+
+Note that the arguments for base class constructor has to be passed from Flying Horse class. Those passed from Bird or Horse will be ignorned.
+
+Compiler will generate a vtable (virtual function table) for classes Bird and Horse which point to single Animal base class.
+
+.play multiple_inheritance.cpp
+* Virtual Functions
+
+virtual function is a special type of function that resolves to the most-derived version of the function with the same signature.
+
+Compilers generate vtable containing the most derived class function pointers for the associated virtual functions. Each class has 
+a vptr that points to the vtable.
+
+vtable is used to resolve the function at runtime.
+
+.play virtual_functions_inheritance.cpp
+* Factory design pattern
+
+It is one of creational design patterns. 
+
+Lets now see how abstract factory design pattern helps the client to not depend on the derived classes completely.
+
+.play factory_pattern.cpp
+* Pure virtual functions
+
+A virtual function with no definition and assigned to zero is a pure virtual function.
+
+A class with at-least one pure virtual function is an Abstract class. Abstract classes cannot be instantiated.
+
+A class with all member function as pure virtual functions is an interfance.
+
+Interfaces help in reducing dependency between the classes
+
+.play pure_virtual_functions.cpp
+* RAII (Resource acquisition is initialization)
+Resource Acquisition is Initialization (RAII) is an extremely popular idiom in C++ that relieves the burden of calling "resource release" operation in a clever way.
+
+.play raii.cpp
+* Defining new exceptions
+New exceptions can be defined by inheriting and overriding the std::exception base class
+
+.play new_exceptions.cpp
+* Friend classes
+A friend class in C++, can access the "private" and "protected" members of the class in which it is declared as a friend
+
+.play friend_class.cpp
+* Friend functions and operator overloading
+A friend function that is a "friend" of a given class is allowed access to private and protected data in that class that it would not normally be able to as if the data was public.
+
+.play friend_functions.cpp
+* Class Templates (Singleton class)
+
+* Templates Specialization
+
+
+* Composition and Strategy Design Pattern
+
+* Temporary objects and explicit keyword
+
+* Introduction to STL
+
+[[http://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html][STL containers summary]]
+
+* Introduction to Boost Libraries
+
+* Return value optimization
+
+* C++-11 features
+<place holder>
+
+auto
+
+move assignment operator
+
+final keyword
+
+std::lock_guard
+
+smart pointers
+
+struct Foo{Foo(const Foo&)=delete;}; // removing copy constructor
+
+range based loops
+
+* Smart Pointers
+
+* Traits
+
+* Template metaprogramming
+
+* Debugging c++ programs
+
+* C++ tour References
+
+vogella - check it up. edx
+
+Effective c++
+
+[[http://stackoverflow.com/]]
+
+[[www.cplusplus.com/doc/tutorial]]
+
+[[http://www.cprogramming.com/tutorial/c++-tutorial.html]]
+
+[[http://www.tutorialspoint.com/cplusplus/index.htm]]
+
+[[http://www.daniweb.com/software-development/cpp/]]
+
+Some more websites from searching in google.
