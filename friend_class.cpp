@@ -66,25 +66,9 @@ class BinaryTree
 		~BinaryTree ();
 
 		friend ostream & operator<< (ostream &, BinaryTree *tree);
+		BinaryTree  operator+ (int key);
+		BinaryTree  operator- (int key);
 };
-
-
-void BinaryTree::in_order_traverse (Node *node, ostream &out)
-{
-	if (node && node->left)
-		in_order_traverse (node->left, out);
-	out << node->key << " ";
-	if (node && node->right)
-		in_order_traverse (node->right, out);
-}
-
-// 
-ostream & operator<< (ostream &out, BinaryTree *tree)
-{
-	out << "Printing Binary Tree InOrder \n";
-	tree->in_order_traverse (tree->root, out);
-	out << "\nDone \n";
-}
 
 
 Node * BinaryTree::find_suitable_parent (Node *parent, int key)
@@ -199,7 +183,7 @@ bool BinaryTree::remove_node_with_one_child (Node *node)
 	return false;
 }
 
-// Ideally we would want to return the node being delete for the users to handle 
+// Ideally we would want to return the node being deleted for the users to handle 
 // data, key destruction
 bool BinaryTree::remove (int key)
 {
@@ -254,6 +238,38 @@ BinaryTree::~BinaryTree ()
 	
 }
 
+BinaryTree  BinaryTree::operator+ (int key)
+{
+	insert(key, 1234);
+
+	return *this;
+}
+
+BinaryTree BinaryTree::operator- (int key)
+{
+	remove (key);
+
+	return *this;
+}
+
+void BinaryTree::in_order_traverse (Node *node, ostream &out)
+{
+	if (node && node->left)
+		in_order_traverse (node->left, out);
+	out << node->key << " ";
+	if (node && node->right)
+		in_order_traverse (node->right, out);
+}
+
+// 
+ostream & operator<< (ostream &out, BinaryTree *tree)
+{
+	out << "Printing Binary Tree InOrder \n";
+	tree->in_order_traverse (tree->root, out);
+	out << "\n\n";
+}
+
+
 int main ()
 {
 	BinaryTree *tree = new BinaryTree ();
@@ -269,13 +285,24 @@ int main ()
 		a[i] = rand () % dataLimit;
 		tree->insert (a[i], 799);
 	} 
-
-	cout << tree;
 	
+	//Tree with data inserted
+	cout << tree;
+
 	int temp = a[(rand() % NumElements)];
-	cout << "removing " << temp << endl;
+	cout << "Removing " << temp << "\n" << endl;
 	tree->remove (temp);
 	cout << tree;
 
-	std::cout << "Demonstrating friend class" << std::endl;
+	// Inserting an element using a fancy overloaded operator
+	cout << "Inserting 799 using our fancy overloaded operator for fun ;) \n" << endl;
+	(*tree) + 799;
+	cout << tree;
+
+	// Deleting an element using a fancy overloaded operator
+	cout << "Removing 799 using our fancy overloaded operator for fun ;) \n" << endl;
+	(*tree) - 799;
+	cout << tree;
+
+	std::cout << "Demonstrating friend class and friend functions" << std::endl;
 }

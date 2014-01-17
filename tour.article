@@ -338,18 +338,25 @@ Resource Acquisition is Initialization (RAII) is an extremely popular idiom in C
 New exceptions can be defined by inheriting and overriding the std::exception base class
 
 .play new_exceptions.cpp
-* Friend classes
+* Friend classes and Friend functions
 A friend class in C++, can access the "private" and "protected" members of the class in which it is declared as a friend
 
-.play friend_class.cpp
-* Friend functions and operator overloading
+A friend class finds its usage when part of the class has a different lifetime compared to the base class. Both base class and its friend can be considered as
+a single unit in this case.
+
+In other cases friend class provide a midpath between public and private access specifiers by providing access to member variables to limited friends.
+
 A friend function that is a "friend" of a given class is allowed access to private and protected data in that class that it would not normally be able to as if the data was public.
 
-.play friend_functions.cpp
+A friend function is useful in case of operator overloading in case the first argument to the overloaded operator is not expected to be a this pointer.
+
+.play friend_class.cpp
+* Operator overloading
+
+
 * Class Templates (Singleton class)
 
 * Templates Specialization
-
 
 * Composition and Strategy Design Pattern
 
