@@ -341,7 +341,7 @@ Interfaces help in reducing dependency between the classes
 .play pure_virtual_functions.cpp
 * TypeCaste Operators
 
-. play type_casting.cpp
+.play type_casting.cpp
 * RAII (Resource acquisition is initialization)
 Resource Acquisition is Initialization (RAII) is an extremely popular idiom in C++ that relieves the burden of calling "resource release" operation in a clever way.
 
