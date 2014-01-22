@@ -341,7 +341,22 @@ Interfaces help in reducing dependency between the classes
 .play pure_virtual_functions.cpp
 * TypeCaste Operators
 
+There are four type caste operators,
+
+static_cast<type> (object) is considered to be a safe cast. It can be used while typecasting fundmental data types such as enum, int etc. It is unsafe while upcasting a base class pointer to a derived class pointer since it does not perform runtime type check.
+
+dynamic_cast<type> (object) can be used to upcaste a base class pointer to a derived class pointer in a safe manner. 
+
+dynamic_cast throws bad_cast exception when run time check fails on references to polymorphic class types.
+
+reinterpret_cast<type> (object) is similar to C style unsafe casting (type) object. It should be avoided in C++.
+
+const_cast<type> (object) is used to remove the constness on a object temporarily to suit the operation on the object.
+
 .play type_casting.cpp
+* const and const_cast
+
+.play const.cpp
 * RAII (Resource acquisition is initialization)
 Resource Acquisition is Initialization (RAII) is an extremely popular idiom in C++ that relieves the burden of calling "resource release" operation in a clever way.
 

@@ -12,13 +12,12 @@ class Animal
 		}
 
 		// Gets weight in pounds
-		virtual int getWeight () const = 0;
+		virtual int getWeight () const {return 0;}
 		virtual void eat () {cout << name << " is Eating \n";}
 		virtual void sleep () {cout << name << " is Sleeping \n";}
 		virtual void speak () {}
 		virtual ~Animal () {}
 		
-		int readWeightFromFile () {return 20;}
 	protected:
 		string name;
 		int weight;
@@ -34,10 +33,7 @@ class Dog : public Animal
 		// Lets ignore setWeight for this demonstration
 		int getWeight () const 
 		{
-			// My Base class implementor did not use a const
-			int ret = const_cast<Dog *>(this)-> readWeightFromFile ();
-
-			return ret;
+			return 20; // In pounds
 		}
 		~Dog () {}
 
@@ -61,6 +57,7 @@ int main ()
 	// Consider we used the creational design pattern to abstract the derived classes
 	Animal *doggy = new Dog ();
 	Animal *bird = new Bird ();
+	Animal a;
 
 	doggy->speak ();
 	bird->speak ();
@@ -69,6 +66,14 @@ int main ()
 	Bird *realBird = dynamic_cast <Bird *> (bird);
 	if (realBird != NULL)
 		realBird->fly ();
+	
+	// Try changing it to static_cast
+	Bird *fakeBird = dynamic_cast <Bird *> (doggy);
+	if (fakeBird != NULL)
+		fakeBird->fly ();
+	
+	// Uncomment me to see bad_cast exception thrown
+	// Bird &b = dynamic_cast <Bird &> (a);
 
 	// safe casting
 	float weightInKG = static_cast<float> (doggy->getWeight () / 2.2046);
