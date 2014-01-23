@@ -380,11 +380,15 @@ A friend function is useful in case of operator overloading in case the first ar
 .play friend_class.cpp
 * Operator overloading
 
-
 * Class Templates (Singleton class)
 
+.play class_templates.cpp
 * Templates Specialization
 
+[[http://www.comeaucomputing.com/techtalk/templates/#typename][Why was the typename required before vector<T>::iterator]]
+[[http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=50]]
+
+.play template_specialization.cpp
 * Composition and Strategy Design Pattern
 
 * Temporary objects and explicit keyword

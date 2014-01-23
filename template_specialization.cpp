@@ -3,6 +3,10 @@
 
 using namespace std;
 
+
+// initialize is non-type parameter
+// one can pass another parameter type too eg:
+// template <typename T, typename U> 
 template <class T, int initialSize>
 class MyContainer
 {
@@ -29,7 +33,6 @@ class MyContainer
 			cout << endl;
 		}
 };
-
 
 template <class T, int initialSize>
 class MyContainer <T*, initialSize>
@@ -59,10 +62,42 @@ class MyContainer <T*, initialSize>
 		vector<T *> arrayList;
 };
 
-/*
+// Partial specialization for bool
+template<int initialSize>
+class MyContainer <bool, initialSize>
+{
+	public:
+		MyContainer ()
+		{
+			arrayList.reserve (initialSize);
+		}
 
-   
- */
+		void addItem (bool item) 
+		{
+			arrayList.push_back (item);
+		}
+
+
+		void displayItems ()
+		{
+			cout << "Displaying items from partially specialized class " << endl;
+			for (typename vector<bool>::iterator it = arrayList.begin (); it != arrayList.end (); ++it)
+			{
+				cout << *it << " ";
+			}
+			cout << endl;
+		}
+	private:
+		vector<bool> arrayList;
+};
+
+// Full specialization for bool would be
+// template <>
+// class MyContainer <bool, 10>
+
+// Note if the base class did not contain a non-type parameter the full specialization for bool will be
+// template <>
+// class MyContainer <bool>
 
 int main ()
 {
