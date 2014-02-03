@@ -9,6 +9,8 @@ class Example
     
     public:
     
+    // using constructor initialization list improves performance rather than
+    // using assignment operator inside the body to initialize
     Example ():a(0), b(0)
     {
 	    cout << "Default constructor called " << endl;
