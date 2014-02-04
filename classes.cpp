@@ -10,6 +10,7 @@ class Illustrate // Try replacing keyword class to struct
 		int a; // Accessible outside the class
 
 		// Member function
+		// Note the implicit this pointer
 		void play ()
 		{
 			cout << "Illustrating classes \n";

@@ -35,6 +35,9 @@ class Horse : public Animal
 		void run () {cout << name << " Super fast run \n";}
 };
 
+// With virtual inheritance the instantiation of the members from the Base class has
+// to happen from the most derived class. The instantiations from the derived classes
+// Bird and Horse will be ignored, although it compiles sucessfully
 class FlyingHorse: public Bird, public Horse
 {
 	public:

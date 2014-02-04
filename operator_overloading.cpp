@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -8,11 +9,11 @@ class Point
 		int iX;
 		int iY;
 	public:
-		Point () {}
+		Point ():iX(0),iY(0) {}
 		Point (int x, int y):iX(x),iY(y) {}
 
 		// Copy constructor. Finds its use primary with a deep copy
-		Point (const Point &from) {}
+		Point (const Point &from);
 
 		ostream & toStream (ostream &out) const;
 		istream & fromStream (istream &in);
@@ -25,6 +26,7 @@ class Point
 		Point & operator++ ();
 		Point operator++(int);
 
+		// Implement the commented member functions
 		//Point & operator-- ();
 		//Point & operator--(int) ();
 
@@ -36,6 +38,12 @@ class Point
 
 };
 	
+Point::Point (const Point &from)
+{
+	iX = from.iX;
+	iY = from.iY;
+}
+
 ostream & Point::toStream (ostream &out) const
 {
 	out << "coordinate x - " << iX << endl;
@@ -84,6 +92,8 @@ Point & Point::operator++ ()
 	return (*this);
 }
 
+// Note the temp object. This causes post increment
+// to be less efficient than pre-increment
 Point Point::operator++(int)
 {
 	Point temp(*this);
@@ -113,5 +123,34 @@ Point Point::operator+ (const Point &add)
 int
 main ()
 {
+	ifstream ifs ("/tmp/input_point.txt", ifstream::in);
+	Point a;
+
+	// uses the overloaded operator to extract input from file stream
+	cout << "Extracting input from fstream \n";
+	ifs >> a;
+	cout << a;
+
+	Point b(4,5);
+	Point c,d,e;
+
+	// chaining or cascading the operator
+	cout << "\nCascading operations using assignment operator \n";
+	c = d = e = b;
+	cout << d;
 	
+	cout << "\nUsing pre-increment operat\n";
+	++d;
+	cout << d;
+	
+	cout << "\nUsing addition assignment operator d+=c \n";
+	d += c;
+	cout << d;
+
+	cout << "\nUsing addition operator k = a+b \n";
+	Point k;
+	k = a + b;
+	cout << k;
+
+	return 0;	
 }

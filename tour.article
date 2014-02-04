@@ -310,6 +310,8 @@ Note that the arguments for base class constructor has to be passed from Flying 
 
 Compiler will generate a vtable (virtual function table) for classes Bird and Horse which point to single Animal base class.
 
+Read [[http://www.parashift.com/c++-faq-lite/multiple-inheritance.html]] for FAQ on multiple inheritance.
+
 .play multiple_inheritance.cpp
 * Virtual Functions
 
@@ -380,20 +382,35 @@ A friend function is useful in case of operator overloading in case the first ar
 .play friend_class.cpp
 * Operator overloading
 
-.play 
+It is possible to give special meanings to the operators based on the objects on which they operate. This
+is called operator overloading in c++.
+
+.play operator_overloading.cpp
 * Temporary objects and explicit keyword
 
 Return value optimization
 
 * Class Templates
 
+A class template provides specification for generating classes based on parameters.
+
 .play class_templates.cpp
 * Templates Specialization
 
+While templates provide a way to use a class for all data types. It is also possible to provide
+a special implementation for a specific data type with template specialization.
+
+A typical example is the vector class in STL. vector<bool> is specialized to store the bool data type
+as bits for optimizing the memory.
+
+Another example of template specialization and operator overloading is the 
+[[http://en.cppreference.com/w/cpp/utility/hash][hash function in c++11]]
+
 [[http://www.comeaucomputing.com/techtalk/templates/#typename][Why was the typename required before vector<T>::iterator]]
-[[http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=50]]
+[[http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=50][Template specialization explained in detail]]
 
 .play template_specialization.cpp
+* Traits
 
 * Introduction to STL
 
@@ -421,7 +438,6 @@ range based loops
 
 * Smart Pointers
 
-* Traits
 
 * Template metaprogramming
 
