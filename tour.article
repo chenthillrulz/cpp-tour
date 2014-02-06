@@ -356,9 +356,6 @@ reinterpret_cast<type> (object) is similar to C style unsafe casting (type) obje
 const_cast<type> (object) is used to remove the constness on a object temporarily to suit the operation on the object.
 
 .play type_casting.cpp
-* const and const_cast
-
-.play const.cpp
 * RAII (Resource acquisition is initialization)
 Resource Acquisition is Initialization (RAII) is an extremely popular idiom in C++ that relieves the burden of calling "resource release" operation in a clever way.
 
@@ -407,6 +404,7 @@ Another example of template specialization and operator overloading is the
 [[http://en.cppreference.com/w/cpp/utility/hash][hash function in c++11]]
 
 [[http://www.comeaucomputing.com/techtalk/templates/#typename][Why was the typename required before vector<T>::iterator]]
+
 [[http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=50][Template specialization explained in detail]]
 
 .play template_specialization.cpp
