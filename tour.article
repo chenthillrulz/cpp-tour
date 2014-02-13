@@ -382,11 +382,29 @@ A friend function is useful in case of operator overloading in case the first ar
 It is possible to give special meanings to the operators based on the objects on which they operate. This
 is called operator overloading in c++.
 
+Note the usage of const as well..
+
 .play operator_overloading.cpp
+* Overloading operator ()
+
+A sample from c++-11 for overloading operator()
+
+.play hash_operator_brace.cpp	
 * Temporary objects and explicit keyword
 
-Return value optimization
+Temporary objects are unnamed objects created on the stack by the compiler.
 
+When a temporary object is created to initialize a reference variable, the name of the temporary object has the same scope as that of the reference variable.
+
+When a temporary object is created during the evaluation of a full-expression, it is destroyed as the last step in its evaluation that lexically contains the point where it was created.
+
+C++ ctors (constructors) that have just one parameter automatically perform implicit type conversion.
+
+The explicit keyword can only be applied to in-class constructor declarations to explicitly construct an object.
+
+[[http://cpp-next.com/archive/2009/08/want-speed-pass-by-value/][Return value optimization]] is a technique used by the compiler to eliminate copy during return by value.
+
+.play temporary.cpp
 * Class Templates
 
 A class template provides specification for generating classes based on parameters.
@@ -408,6 +426,14 @@ Another example of template specialization and operator overloading is the
 [[http://www.informit.com/guides/content.aspx?g=cplusplus&seqNum=50][Template specialization explained in detail]]
 
 .play template_specialization.cpp
+* Template metaprogramming
+Template meta-programming is the practice of using templates to generate types and functions to perform computations at compile-time and generate programs. 
+
+The type system in C++ requires the compiler to calculate many types of expressions for the proper code to be generated
+
+[[http://www.codeproject.com/Articles/3743/A-gentle-introduction-to-Template-Metaprogramming][More examples]] for template metaprogramming.
+
+.play template_metaprogramming.cpp
 * Traits
 
 * Introduction to STL
@@ -435,9 +461,6 @@ struct Foo{Foo(const Foo&)=delete;}; // removing copy constructor
 range based loops
 
 * Smart Pointers
-
-
-* Template metaprogramming
 
 * Debugging c++ programs
 
