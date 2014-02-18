@@ -39,7 +39,7 @@ int
 main ()
 {
 	list<Employee> empList;
-	Employee emp("Ravi", "Bangalore");
+	Employee emp("Kiran", "Bangalore");
 	string sFind = "Koushik";
 
 	empList.push_back(emp);

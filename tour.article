@@ -436,6 +436,11 @@ The type system in C++ requires the compiler to calculate many types of expressi
 .play template_metaprogramming.cpp
 * Traits
 
+Think of a trait as a small object whose main purpose is to carry information used by another object or algorithm to determine "policy" or "implementation details". - Bjarne Stroustrup
+
+Traits allow to make compile-time decisions based on types, much as one can make runtime decisions based on values.
+
+.play traits.cpp
 * Introduction to STL
 
 [[http://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html][STL containers summary]]
