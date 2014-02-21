@@ -6,6 +6,22 @@
 
 using namespace std;
 
+namespace nonOptimized
+{
+	template<typename T1, typename T2>
+	inline T2 copy (T1 first, T1 last, T2 out)
+	{
+		while (first != last)
+		{
+			*out = *first;
+			++out;
+			++first;
+		}
+
+		return out;
+	}
+}
+
 namespace optimized
 {
 	template<bool b>
@@ -50,22 +66,6 @@ namespace optimized
 	}
 }
 
-namespace nonOptimized
-{
-	template<typename T1, typename T2>
-	inline T2 copy (T1 first, T1 last, T2 out)
-	{
-		while (first != last)
-		{
-			*out = *first;
-			++out;
-			++first;
-		}
-
-		return out;
-	}
-}
-
 // Test data
 const int arraySize = 1000;
 int iArray_[arraySize] = {0,};
@@ -85,20 +85,8 @@ main ()
 {
 	// cache load:
 	optimized::copy(ciArray, ciArray + arraySize, iArray);
-
+	
 	cout << "Measuring time using non optimized copy" << endl;
-	// Time take for nonOptimized copy
-	{
-		boost::timer::auto_cpu_timer t;
-		
-		for(int i = 0; i < iterCount; ++i)
-			optimized::copy(ciArray, ciArray + arraySize, iArray);
-	}
-	
-	// cache load:
-	optimized::copy(ciArray, ciArray + arraySize, iArray);
-	
-	cout << "Measuring time using optimized copy" << endl;
 	// Time take for optimized copy
 	{
 		boost::timer::auto_cpu_timer t;
@@ -107,5 +95,17 @@ main ()
 			nonOptimized::copy(ciArray, ciArray + arraySize, iArray);
 	}
 	
+	// cache load:
+	optimized::copy(ciArray, ciArray + arraySize, iArray);
+
+	cout << "Measuring time using optimized copy" << endl;
+	// Time take for nonOptimized copy
+	{
+		boost::timer::auto_cpu_timer t;
+		
+		for(int i = 0; i < iterCount; ++i)
+			optimized::copy(ciArray, ciArray + arraySize, iArray);
+	}
+
 	return 0;	
 }

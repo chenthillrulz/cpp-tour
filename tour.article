@@ -385,11 +385,6 @@ is called operator overloading in c++.
 Note the usage of const as well..
 
 .play operator_overloading.cpp
-* Overloading operator ()
-
-A sample from c++-11 for overloading operator()
-
-.play hash_operator_brace.cpp	
 * Temporary objects and explicit keyword
 
 Temporary objects are unnamed objects created on the stack by the compiler.
@@ -441,6 +436,23 @@ Think of a trait as a small object whose main purpose is to carry information us
 Traits allow to make compile-time decisions based on types, much as one can make runtime decisions based on values.
 
 .play traits.cpp
+* Copy optimization using Traits
+
+.play traits1.cpp
+* Add reference Traits
+
+* Traits to minimize code duplication
+
+.play traits3.cpp
+* Functors
+
+* Lambda expressions
+
+* Hash Functor in c++-11
+
+A sample from c++-11 for hash functor
+
+.play hash_operator_brace.cpp
 * Introduction to STL
 
 [[http://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html][STL containers summary]]
