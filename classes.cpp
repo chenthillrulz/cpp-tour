@@ -6,7 +6,7 @@ using namespace std;
 class Illustrate // Try replacing keyword class to struct
 {
 	public:
-		static const float Version = 0.1;
+		constexpr static const float Version = 0.1; // c++-11 keyword constexpr
 		int a; // Accessible outside the class
 
 		// Member function
