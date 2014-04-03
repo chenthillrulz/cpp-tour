@@ -452,7 +452,7 @@ Traits allow to make compile-time decisions based on types, much as one can make
 
 A sample from c++-11 for hash functor
 
-.play hash_operator_brace.cpp
+.play hash_functor.cpp
 * Introduction to STL
 
 [[http://www.cs.helsinki.fi/u/tpkarkka/alglib/k06/lectures/containers.html][STL containers summary]]
