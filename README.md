@@ -7,6 +7,7 @@ The article contains the notes for the same. Both these are clubbed and placed u
 
 #Screenshot
 ![Cpp Tour](https://raw.githubusercontent.com/chenthillrulz/cpp-tour/master/screen-shots/cpp_tour.jpg)
+![Table Of Contents](https://raw.githubusercontent.com/chenthillrulz/cpp-tour/master/screen-shots/toc.jpg)
 
 
 #License
