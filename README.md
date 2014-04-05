@@ -5,6 +5,9 @@ This repository contains the sample programs that demonstrate the various featur
 
 The article contains the notes for the same. Both these are clubbed and placed under a hacked gotour packag to be viewed/executed like http://tour.golang.org/#1 .
 
+#Screenshot
+![Cpp Tour] (]https://raw.githubusercontent.com/chenthillrulz/cpp-tour/master/screen-shots/cpp_tour.jpg)
+
 
 #License
 
