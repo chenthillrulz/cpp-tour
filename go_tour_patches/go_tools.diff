@@ -1,0 +1,60 @@
+diff -r 4060450fb1fd playground/socket/socket.go
+--- a/playground/socket/socket.go	Mon Jan 06 14:53:03 2014 -0500
++++ b/playground/socket/socket.go	Mon Apr 07 13:29:14 2014 +0530
+@@ -17,6 +17,7 @@
+ 	"bytes"
+ 	"encoding/json"
+ 	"errors"
++	"fmt"
+ 	"go/parser"
+ 	"go/token"
+ 	"io"
+@@ -201,9 +202,9 @@
+ 	// resultant *exec.Cmd is a handle to the user's program
+ 	// (rather than the go tool process).
+ 	// This makes Kill work.
+-
+-	bin := filepath.Join(tmpdir, "compile"+strconv.Itoa(<-uniq))
+-	src := bin + ".go"
++	
++	bin := filepath.Join(tmpdir, "sample"+strconv.Itoa(<-uniq))
++	src := bin + ".cpp"
+ 	if runtime.GOOS == "windows" {
+ 		bin += ".exe"
+ 	}
+@@ -218,14 +219,15 @@
+ 	// build x.go, creating x
+ 	p.bin = bin // to be removed by p.end
+ 	dir, file := filepath.Split(src)
+-	args := []string{"go", "build", "-tags", "OMIT"}
+-	if opt != nil && opt.Race {
++//	args := []string{"go", "build", "-tags", "OMIT"}
++	args := []string{"g++", "-std=c++0x", "-L/usr/lib64", "-lstdc++", "-L/usr/lib64", "-lboost_chrono", "-lboost_thread", "-lboost_system", "-lboost_timer"}
++/*	if opt != nil && opt.Race {
+ 		p.out <- &Message{
+ 			Id: p.id, Kind: "stderr",
+ 			Body: "Running with race detector.\n",
+ 		}
+ 		args = append(args, "-race")
+-	}
++	} */
+ 	args = append(args, "-o", bin, file)
+ 	cmd := p.cmd(dir, args...)
+ 	cmd.Stdout = cmd.Stderr // send compiler output to stderr
+@@ -233,11 +235,13 @@
+ 		return err
+ 	}
+ 
++	fmt.Println (bin)
+ 	// run x
+-	cmd = p.cmd("", bin)
+-	if opt != nil && opt.Race {
++	cmd = exec.Command(bin)
++/*	if opt != nil && opt.Race {
+ 		cmd.Env = append(cmd.Env, "GOMAXPROCS=2")
+-	}
++	} */
++	cmd.Stdout = &messageWriter{id: p.id, kind: "stdout", out: p.out}
+ 	if err := cmd.Start(); err != nil {
+ 		// If we failed to exec, that might be because they built
+ 		// a non-main package instead of an executable.

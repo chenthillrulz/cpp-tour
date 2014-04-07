@@ -1,0 +1,72 @@
+diff -r 72382f964b32 gotour/local.go
+--- a/gotour/local.go	Thu Dec 26 15:35:29 2013 -0800
++++ b/gotour/local.go	Mon Apr 07 13:33:53 2014 +0530
+@@ -35,7 +35,8 @@
+ )
+ 
+ var (
+-	httpListen  = flag.String("http", "127.0.0.1:3999", "host:port to listen on")
++	// Change the ip address and you may also want to run this inside a secure network
++	httpListen  = flag.String("http", "127.0.0.1:7999", "host:port to listen on")
+ 	openBrowser = flag.Bool("openbrowser", true, "open browser automatically")
+ )
+ 
+@@ -49,7 +50,7 @@
+ // isRoot reports whether path is the root directory of the tour tree.
+ // To be the root, it must have content and template subdirectories.
+ func isRoot(path string) bool {
+-	_, err := os.Stat(filepath.Join(path, "content", "tour.article"))
++	_, err := os.Stat(filepath.Join(path, "content", "cpp-tour", "tour.article"))
+ 	if err == nil {
+ 		_, err = os.Stat(filepath.Join(path, "template", "tour.tmpl"))
+ 	}
+diff -r 72382f964b32 gotour/tour.go
+--- a/gotour/tour.go	Thu Dec 26 15:35:29 2013 -0800
++++ b/gotour/tour.go	Mon Apr 07 13:33:53 2014 +0530
+@@ -36,7 +36,7 @@
+ 	f, err := os.Open(source)
+ 	if err != nil {
+ 		// See if it exists in the content directory in the root.
+-		source = filepath.Join(root, "content", source)
++		source = filepath.Join(root, "content", "cpp-tour", source)
+ 		f, err = os.Open(source)
+ 		if err != nil {
+ 			return err
+diff -r 72382f964b32 js/codemirror/lib/go.js
+--- a/js/codemirror/lib/go.js	Thu Dec 26 15:35:29 2013 -0800
++++ b/js/codemirror/lib/go.js	Mon Apr 07 13:33:53 2014 +0530
+@@ -2,8 +2,9 @@
+   var indentUnit = config.indentUnit;
+ 
+   var keywords = {
+-    "break":true, "case":true, "chan":true, "const":true, "continue":true,
+-    "default":true, "defer":true, "else":true, "fallthrough":true, "for":true,
++    "break":true, "case":true, "chan":true, "const":true, "continue":true,"char":true,"int":true, "float":true, "double":true, "#include":true, "#define":true,
++    "using":true, "namespace":true, "cout":true, "cin":true, "class":true, "struct":"true", "static":true, "void":true,
++    "default":true, "defer":true, "else":true, "fallthrough":true, "for":true,"public":true,"private":true,"protected":true,
+     "func":true, "go":true, "goto":true, "if":true, "import":true,
+     "interface":true, "map":true, "package":true, "range":true, "return":true,
+     "select":true, "struct":true, "switch":true, "type":true, "var":true
+@@ -18,7 +19,7 @@
+ 
+   var blockKeywords = {
+     "else":true, "for":true, "func":true, "if":true, "interface":true,
+-    "select":true, "struct":true, "switch":true
++    "select":true, "struct":true, "switch":true,"class":true
+   };
+ 
+   var isOperatorChar = /[+\-*&^%:=<>!|\/]/;
+diff -r 72382f964b32 static/gopher.png
+Binary file static/gopher.png has changed
+diff -r 72382f964b32 static/tour.css
+--- a/static/tour.css	Thu Dec 26 15:35:29 2013 -0800
++++ b/static/tour.css	Mon Apr 07 13:33:53 2014 +0530
+@@ -17,7 +17,7 @@
+ 	min-height: 100%;
+ 	margin: 0 0 0 auto;
+ 	width: 550px;
+-	background: #FFF url(gopher.png) no-repeat 1.2em bottom;
++	background: #FFF url(c++.png) no-repeat 1.2em bottom;
+ 	position: relative;
+ }
+ 
