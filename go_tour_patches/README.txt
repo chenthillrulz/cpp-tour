@@ -12,6 +12,9 @@ from go-tour directory
 
 The c++ tour would appear in the web-brower.
 
+Please install boost libraries under /usr/lib64/. Yes it needs s 64 bit machine. Or make sure
+you change the go.tools patch to point the location of boost libraries.
+
 If a static ip-address is specified, anyone from the network cannot connect and run the tour!!
 
 Note:	The connection is a http unsecure connection.. 
