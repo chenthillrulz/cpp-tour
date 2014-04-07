@@ -446,8 +446,9 @@ Traits allow to make compile-time decisions based on types, much as one can make
 .play traits3.cpp
 * Functors
 
-* Lambda expressions
+C++ allows the function call operator() to be overloaded, such that an object instantiated from a class can be "called" like a function.
 
+.play heap_functor.cpp
 * Hash Functor in c++-11
 
 A sample from c++-11 for hash functor
@@ -476,8 +477,9 @@ smart pointers
 struct Foo{Foo(const Foo&)=delete;}; // removing copy constructor
 
 range based loops
-
 * Smart Pointers
+
+* Lambda expressions
 
 * Debugging c++ programs
 
