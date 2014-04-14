@@ -2,7 +2,8 @@ Install go-tour
 The code for go-tour will remain under the directory <go_workspace>/src/code.google.com/p/go-tour/
 and the code code go.tools will be under <go_workspace>/src/code.google.com/p/go.tools/
 
-Apply the go_tools.diff from go.tools directory.
+Apply the go_tools.diff from go.tools directory. This can also modified to work with other languages such as 
+Python, Perl etc.!!
 Apply the go_tour_changes.diff patch inside go-tour
 copy c++.png and put it under go-tour/static directory
 clone with cpp-tour contents under go-tour/contents directory
